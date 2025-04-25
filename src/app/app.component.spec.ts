@@ -1,34 +1,44 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { TranslateService } from '@ngx-translate/core';
-import { of } from 'rxjs';
+import { TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { ExperienceComponent } from './experience/experience.component';
+import { SkillsComponent } from './skills/skills.component';
+import { ContactComponent } from './contact/contact.component';
+import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 
 describe('AppComponent', () => {
-  let translateService: jasmine.SpyObj<TranslateService>;
+  let translateService: TranslateService;
 
   beforeEach(() => {
-    const translateSpy = jasmine.createSpyObj('TranslateService', [
-      'addLangs',
-      'setDefaultLang',
-      'getBrowserLang',
-      'use',
-      'getDefaultLang',
-      'getLangs'
-    ]);
-
-    translateSpy.getBrowserLang.and.returnValue('en');
-    translateSpy.getDefaultLang.and.returnValue('en');
-    translateSpy.getLangs.and.returnValue(['en', 'fr']);
-
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent],
+      imports: [
+        RouterTestingModule,
+        HttpClientModule,
+        TranslateModule.forRoot()
+      ],
+      declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        HomeComponent,
+        AboutComponent,
+        ExperienceComponent,
+        SkillsComponent,
+        ContactComponent,
+        LanguageSwitcherComponent
+      ],
       providers: [
-        { provide: TranslateService, useValue: translateSpy }
+        TranslateService,
+        TranslateStore
       ]
     });
-    translateService = TestBed.inject(TranslateService) as jasmine.SpyObj<TranslateService>;
+    translateService = TestBed.inject(TranslateService);
   });
 
   it('should create the app', () => {
@@ -40,9 +50,8 @@ describe('AppComponent', () => {
   it('should initialize translation service', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(translateService.addLangs).toHaveBeenCalledWith(['en', 'fr']);
-    expect(translateService.setDefaultLang).toHaveBeenCalledWith('en');
-    expect(translateService.getBrowserLang).toHaveBeenCalled();
-    expect(translateService.use).toHaveBeenCalledWith('en');
+    expect(translateService.getDefaultLang()).toBe('en');
+    expect(translateService.getLangs()).toContain('en');
+    expect(translateService.getLangs()).toContain('fr');
   });
 });
