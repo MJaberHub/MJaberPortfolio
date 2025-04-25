@@ -22,6 +22,21 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
+## CI/CD Pipeline
+
+This project uses GitHub Actions for continuous integration and deployment. The pipeline:
+
+1. Runs on every push to master and pull requests
+2. Performs the following steps:
+   - Sets up Node.js environment
+   - Installs dependencies
+   - Runs linting
+   - Runs tests
+   - Builds the application
+   - Deploys to GitHub Pages (only on master branch)
+
+The application is automatically deployed to GitHub Pages at: https://mjaberhub.github.io/MJaberPortfolio/
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
