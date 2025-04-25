@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  AWS_REGION: me-south-1
+  S3_BUCKET: portfolio-website-mjaber
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,9 +35,20 @@ jobs:
     - name: Build
       run: npm run build -- --configuration=production
       
-    - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/master'
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist/MJaberPortfolio
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+      
+    - name: Deploy to S3
+      if: github.ref == 'refs/heads/master'
+      run: |
+        aws s3 sync dist/mohamad-jaber-portfolio/ s3://${{ env.S3_BUCKET }} --delete
+        aws s3 cp dist/mohamad-jaber-portfolio/index.html s3://${{ env.S3_BUCKET }}/index.html --cache-control "no-cache"
+      
+    # - name: Invalidate CloudFront cache
+    #   if: github.ref == 'refs/heads/master'
+    #   run: |
+    #     aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
