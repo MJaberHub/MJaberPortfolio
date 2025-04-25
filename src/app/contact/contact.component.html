@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-12">
+      <h2 class="section-title">{{ 'CONTACT.TITLE' | translate }}</h2>
+      <p class="lead">{{ 'CONTACT.SUBTITLE' | translate }}</p>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{ 'CONTACT.FORM_TITLE' | translate }}</h4>
+          <div *ngIf="!submitted">
+            <form (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="name" class="form-label">{{ 'CONTACT.NAME' | translate }}</label>
+                <input type="text" class="form-control" id="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">{{ 'CONTACT.EMAIL' | translate }}</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="subject" class="form-label">{{ 'CONTACT.SUBJECT' | translate }}</label>
+                <input type="text" class="form-control" id="subject">
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">{{ 'CONTACT.MESSAGE' | translate }}</label>
+                <textarea class="form-control" id="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">{{ 'CONTACT.SEND' | translate }}</button>
+            </form>
+          </div>
+          <div *ngIf="submitted" class="alert alert-success">
+            {{ 'CONTACT.SUCCESS' | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{ 'CONTACT.INFO_TITLE' | translate }}</h4>
+          <ul class="list-unstyled contact-info">
+            <li class="mb-3">
+              <i class="fa fa-envelope fa-lg text-primary me-3"></i>
+              <span>ing.mohamad.jaber&#64;gmail.com</span>
+            </li>
+            <li class="mb-3">
+              <i class="fa fa-phone fa-lg text-primary me-3"></i>
+              <span>+966 53 3860015 | +961 70 548882</span>
+            </li>
+            <li class="mb-3">
+              <i class="fa fa-map-marker fa-lg text-primary me-3"></i>
+              <span>Saudi Arabia, Riyadh</span>
+            </li>
+            <li class="mb-3">
+              <i class="fa fa-linkedin fa-lg text-primary me-3"></i>
+              <a href="https://linkedin.com/in/mohamad-jaber" target="_blank">linkedin.com/in/mohamad-jaber</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card mt-4">
+        <div class="card-body">
+          <h4 class="card-title">{{ 'CONTACT.AVAILABILITY' | translate }}</h4>
+          <p>{{ 'CONTACT.AVAILABILITY_TEXT' | translate }}</p>
+          <a href="mailto:ing.mohamad.jaber@gmail.com" class="btn btn-outline-primary">
+            {{ 'CONTACT.EMAIL_ME' | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>

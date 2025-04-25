@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-12">
+      <h2 class="section-title">{{ 'EXPERIENCE.TITLE' | translate }}</h2>
+      <p class="lead">{{ 'EXPERIENCE.SUBTITLE' | translate }}</p>
+    </div>
+  </div>
+  
+  <div class="timeline mt-5">
+    <div class="timeline-item" *ngFor="let exp of experiences; let i = index" [ngClass]="{'left': i % 2 === 0, 'right': i % 2 !== 0}">
+      <div class="timeline-content">
+        <div class="company-logo-container">
+          <img [src]="exp.logoPath" [alt]="exp.company | translate" class="company-logo">
+        </div>
+        <h3>{{ exp.title | translate }}</h3>
+        <h4>{{ exp.company | translate }}</h4>
+        <p class="period">{{ exp.period | translate }}</p>
+        <p class="location"><i class="fa fa-map-marker me-2"></i>{{ exp.location | translate }}</p>
+        <p>{{ exp.description | translate }}</p>
+        <h5>{{ 'EXPERIENCE.KEY_RESPONSIBILITIES' | translate }}</h5>
+        <ul>
+          <li *ngFor="let resp of exp.responsibilities">{{ resp | translate }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>

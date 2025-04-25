@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-12">
+      <h2 class="section-title">{{ 'SKILLS.TITLE' | translate }}</h2>
+      <p class="lead">{{ 'SKILLS.SUBTITLE' | translate }}</p>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-md-6" *ngFor="let category of skillCategories">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h4>{{ category.name | translate }}</h4>
+        </div>
+        <div class="card-body">
+          <div class="skill-item" *ngFor="let skill of category.skills">
+            <div class="d-flex justify-content-between">
+              <span>{{ skill.name }}</span>
+              <span>{{ skill.level }}%</span>
+            </div>
+            <div class="progress mt-1 mb-3">
+              <div class="progress-bar bg-primary" [style.width.%]="skill.level"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>{{ 'SKILLS.PROJECTS_TITLE' | translate }}</h4>
+        </div>
+        <div class="card-body">
+          <ul class="project-highlights">
+            <li *ngFor="let project of projectHighlights">{{ project | translate }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
