@@ -2,17 +2,33 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { TranslateService } from '@ngx-translate/core';
+import { of } from 'rxjs';
 
 describe('AppComponent', () => {
-  let translateService: TranslateService;
+  let translateService: jasmine.SpyObj<TranslateService>;
 
   beforeEach(() => {
+    const translateSpy = jasmine.createSpyObj('TranslateService', [
+      'addLangs',
+      'setDefaultLang',
+      'getBrowserLang',
+      'use',
+      'getDefaultLang',
+      'getLangs'
+    ]);
+
+    translateSpy.getBrowserLang.and.returnValue('en');
+    translateSpy.getDefaultLang.and.returnValue('en');
+    translateSpy.getLangs.and.returnValue(['en', 'fr']);
+
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [AppComponent],
-      providers: [TranslateService]
+      providers: [
+        { provide: TranslateService, useValue: translateSpy }
+      ]
     });
-    translateService = TestBed.inject(TranslateService);
+    translateService = TestBed.inject(TranslateService) as jasmine.SpyObj<TranslateService>;
   });
 
   it('should create the app', () => {
@@ -24,8 +40,9 @@ describe('AppComponent', () => {
   it('should initialize translation service', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(translateService.getDefaultLang()).toBe('en');
-    expect(translateService.getLangs()).toContain('en');
-    expect(translateService.getLangs()).toContain('fr');
+    expect(translateService.addLangs).toHaveBeenCalledWith(['en', 'fr']);
+    expect(translateService.setDefaultLang).toHaveBeenCalledWith('en');
+    expect(translateService.getBrowserLang).toHaveBeenCalled();
+    expect(translateService.use).toHaveBeenCalledWith('en');
   });
 });

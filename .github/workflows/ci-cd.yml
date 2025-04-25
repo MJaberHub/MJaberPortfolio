@@ -32,6 +32,11 @@ jobs:
         npm install
         npm ci
 
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+
     - name: Run linting
       run: npm run lint
 
@@ -39,8 +44,9 @@ jobs:
       run: |
         export CHROME_BIN=/usr/bin/google-chrome
         export DISPLAY=:99
-        /usr/bin/Xvfb :99 -screen 0 1280x1024x24 &
-        npm test -- --browsers ChromeHeadless --watch=false
+        /usr/bin/Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
+        sleep 3
+        npm test -- --browsers ChromeHeadless --watch=false --log-level=ERROR
 
     - name: Build
       id: build
