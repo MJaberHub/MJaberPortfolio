@@ -15,7 +15,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      build_artifact: ${{ steps.build.outputs.build_artifact }}
+      build_success: ${{ steps.build.outputs.success }}
+      build_version: ${{ steps.version.outputs.version }}
 
     steps:
     - uses: actions/checkout@v3
@@ -39,22 +40,29 @@ jobs:
       
     - name: Build
       id: build
-      run: npm run build -- --configuration=production
+      run: |
+        npm run build -- --configuration=production
+        echo "success=true" >> $GITHUB_OUTPUT
+      
+    - name: Get version
+      id: version
+      run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
       
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: dist
         path: dist/mohamad-jaber-portfolio/
+        retention-days: 1
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'  # Only run on manual trigger
+    if: github.event_name == 'workflow_dispatch' && needs.build.outputs.build_success == 'true'  # Only run on manual trigger and successful build
 
     steps:
     - name: Download build artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v3.1.2
       with:
         name: dist
         path: dist/mohamad-jaber-portfolio/
