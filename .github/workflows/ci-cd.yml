@@ -46,7 +46,7 @@ jobs:
         export DISPLAY=:99
         /usr/bin/Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
         sleep 3
-        npm test -- --browsers ChromeHeadless --watch=false --log-level=ERROR
+        npm test -- --browsers ChromeHeadless --watch=false --log-level=error
 
     - name: Build
       id: build
