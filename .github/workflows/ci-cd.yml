@@ -5,6 +5,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 env:
   AWS_REGION: me-south-1
@@ -13,6 +14,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      build_artifact: ${{ steps.build.outputs.build_artifact }}
 
     steps:
     - uses: actions/checkout@v3
@@ -35,8 +38,27 @@ jobs:
       run: npm test
       
     - name: Build
+      id: build
       run: npm run build -- --configuration=production
       
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: dist/mohamad-jaber-portfolio/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'  # Only run on manual trigger
+
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: dist
+        path: dist/mohamad-jaber-portfolio/
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -45,12 +67,14 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
       
     - name: Deploy to S3
-      if: github.ref == 'refs/heads/master'
       run: |
-        aws s3 sync dist/mohamad-jaber-portfolio/ s3://${{ env.S3_BUCKET }} --delete
-        aws s3 cp dist/mohamad-jaber-portfolio/index.html s3://${{ env.S3_BUCKET }}/index.html --cache-control "no-cache"
-      
-    # - name: Invalidate CloudFront cache
-    #   if: github.ref == 'refs/heads/master'
-    #   run: |
-    #     aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+        # Upload all files except index.html with cache control
+        aws s3 sync dist/mohamad-jaber-portfolio/ s3://${{ env.S3_BUCKET }} \
+          --exclude "index.html" \
+          --cache-control "public, max-age=31536000" \
+          --delete
+        
+        # Upload index.html with no cache
+        aws s3 cp dist/mohamad-jaber-portfolio/index.html s3://${{ env.S3_BUCKET }}/index.html \
+          --cache-control "no-cache, no-store, must-revalidate" \
+          --content-type "text/html; charset=utf-8"
