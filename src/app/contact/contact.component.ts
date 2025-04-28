@@ -13,11 +13,14 @@ export class ContactComponent {
   @ViewChild('messageInput') messageInput!: ElementRef;
   submitted = false;
   isError = false;
+  isLoading = false;
 
   constructor(private emailService: EmailService) { }
 
   onSubmit(event: Event) {
     event.preventDefault();
+    this.isLoading = true;
+    this.isError = false;
 
     const data = {
       name: this.nameInput.nativeElement.value,
@@ -30,10 +33,12 @@ export class ContactComponent {
     this.emailService.sendEmail(data).subscribe({
       next: (res) => {
         this.submitted = true;
+        this.isLoading = false;
       },
       error: (err) => {
         console.error(err);
         this.isError = true;
+        this.isLoading = false;
       }
     });
   }

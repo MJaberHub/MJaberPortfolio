@@ -14,21 +14,27 @@
           <form>
             <div class="mb-3">
               <label for="name" class="form-label">{{ 'CONTACT.NAME' | translate }}</label>
-              <input type="text" class="form-control" id="name" #nameInput required>
+              <input type="text" class="form-control" id="name" #nameInput required [disabled]="isLoading">
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">{{ 'CONTACT.EMAIL' | translate }}</label>
-              <input type="email" class="form-control" id="email" #emailInput required>
+              <input type="email" class="form-control" id="email" #emailInput required [disabled]="isLoading">
             </div>
             <div class="mb-3">
               <label for="subject" class="form-label">{{ 'CONTACT.SUBJECT' | translate }}</label>
-              <input type="text" class="form-control" id="subject" #subjectInput required>
+              <input type="text" class="form-control" id="subject" #subjectInput required [disabled]="isLoading">
             </div>
             <div class="mb-3">
               <label for="message" class="form-label">{{ 'CONTACT.MESSAGE' | translate }}</label>
-              <textarea class="form-control" id="message" rows="5" #messageInput required></textarea>
+              <textarea class="form-control" id="message" rows="5" #messageInput required [disabled]="isLoading"></textarea>
             </div>
-            <button type="submit" (click)="onSubmit($event)" class="btn btn-primary">{{ 'CONTACT.SEND' | translate }}</button>
+            <button type="submit" (click)="onSubmit($event)" class="btn btn-primary" [disabled]="isLoading">
+              <span *ngIf="!isLoading">{{ 'CONTACT.SEND' | translate }}</span>
+              <div *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <span *ngIf="isLoading">{{ 'CONTACT.SENDING' | translate }}</span>
+            </button>
           </form>
         </div>
         <div *ngIf="submitted" class="alert alert-success">

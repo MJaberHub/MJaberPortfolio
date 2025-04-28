@@ -104,6 +104,7 @@
       "SUBJECT": "Subject",
       "MESSAGE": "Message",
       "SEND": "Send Message",
+      "SENDING": "Sending...",
       "SUCCESS": "Thank you for your message! I'll get back to you soon.",
       "FAIL": "An Error Occured. Please try again later.",
       "INFO_TITLE": "Contact Information",

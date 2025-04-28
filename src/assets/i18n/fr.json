@@ -104,6 +104,7 @@
       "SUBJECT": "Sujet",
       "MESSAGE": "Message",
       "SEND": "Envoyer le Message",
+      "SENDING": "Envoi en cours...",
       "SUCCESS": "Merci pour votre message! Je vous répondrai bientôt.",
       "FAIL": "Une erreur s'est produite. Veuillez réessayer plus tard.",
       "INFO_TITLE": "Coordonnées",
