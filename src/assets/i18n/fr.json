@@ -105,6 +105,7 @@
       "MESSAGE": "Message",
       "SEND": "Envoyer le Message",
       "SUCCESS": "Merci pour votre message! Je vous répondrai bientôt.",
+      "FAIL": "Une erreur s'est produite. Veuillez réessayer plus tard.",
       "INFO_TITLE": "Coordonnées",
       "AVAILABILITY": "Disponibilité",
       "AVAILABILITY_TEXT": "Je suis actuellement ouvert à de nouvelles opportunités et projets intéressants en ingénierie logicielle, particulièrement dans les domaines de la FinTech et de la Banque.",
