@@ -11,24 +11,58 @@
       <div class="card-body">
         <h4 class="card-title">{{ 'CONTACT.FORM_TITLE' | translate }}</h4>
         <div *ngIf="!submitted && !isError">
-          <form>
+          <form #contactForm="ngForm" (ngSubmit)="onSubmit($event)">
             <div class="mb-3">
               <label for="name" class="form-label">{{ 'CONTACT.NAME' | translate }}</label>
-              <input type="text" class="form-control" id="name" #nameInput required [disabled]="isLoading">
+              <input type="text" class="form-control" id="name" name="name" ngModel #nameInput="ngModel" required [disabled]="isLoading" 
+                [ngClass]="{'is-invalid': nameInput.invalid && (nameInput.dirty || nameInput.touched)}">
+              <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)" class="invalid-feedback">
+                <div *ngIf="nameInput.errors?.['required']">
+                  {{ 'CONTACT.NAME_REQUIRED' | translate }}
+                </div>
+              </div>
             </div>
+            
             <div class="mb-3">
               <label for="email" class="form-label">{{ 'CONTACT.EMAIL' | translate }}</label>
-              <input type="email" class="form-control" id="email" #emailInput required [disabled]="isLoading">
+              <input type="email" class="form-control" id="email" name="email" ngModel #emailInput="ngModel" 
+                required email [disabled]="isLoading"
+                [ngClass]="{'is-invalid': emailInput.invalid && (emailInput.dirty || emailInput.touched)}">
+              <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="invalid-feedback">
+                <div *ngIf="emailInput.errors?.['required']">
+                  {{ 'CONTACT.EMAIL_REQUIRED' | translate }}
+                </div>
+                <div *ngIf="emailInput.errors?.['email']">
+                  {{ 'CONTACT.EMAIL_INVALID' | translate }}
+                </div>
+              </div>
             </div>
+            
             <div class="mb-3">
               <label for="subject" class="form-label">{{ 'CONTACT.SUBJECT' | translate }}</label>
-              <input type="text" class="form-control" id="subject" #subjectInput required [disabled]="isLoading">
+              <input type="text" class="form-control" id="subject" name="subject" ngModel #subjectInput="ngModel" 
+                required [disabled]="isLoading"
+                [ngClass]="{'is-invalid': subjectInput.invalid && (subjectInput.dirty || subjectInput.touched)}">
+              <div *ngIf="subjectInput.invalid && (subjectInput.dirty || subjectInput.touched)" class="invalid-feedback">
+                <div *ngIf="subjectInput.errors?.['required']">
+                  {{ 'CONTACT.SUBJECT_REQUIRED' | translate }}
+                </div>
+              </div>
             </div>
+            
             <div class="mb-3">
               <label for="message" class="form-label">{{ 'CONTACT.MESSAGE' | translate }}</label>
-              <textarea class="form-control" id="message" rows="5" #messageInput required [disabled]="isLoading"></textarea>
+              <textarea class="form-control" id="message" name="message" rows="5" ngModel #messageInput="ngModel" 
+                required [disabled]="isLoading"
+                [ngClass]="{'is-invalid': messageInput.invalid && (messageInput.dirty || messageInput.touched)}"></textarea>
+              <div *ngIf="messageInput.invalid && (messageInput.dirty || messageInput.touched)" class="invalid-feedback">
+                <div *ngIf="messageInput.errors?.['required']">
+                  {{ 'CONTACT.MESSAGE_REQUIRED' | translate }}
+                </div>
+              </div>
             </div>
-            <button type="submit" (click)="onSubmit($event)" class="btn btn-primary" [disabled]="isLoading">
+            
+            <button type="submit" class="btn btn-primary" [disabled]="isLoading || !contactForm.valid">
               <span *ngIf="!isLoading">{{ 'CONTACT.SEND' | translate }}</span>
               <div *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status">
                 <span class="visually-hidden">Loading...</span>

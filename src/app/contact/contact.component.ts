@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { EmailService } from '../services/email.service';
 
 @Component({
@@ -7,36 +8,38 @@ import { EmailService } from '../services/email.service';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
-  @ViewChild('nameInput') nameInput!: ElementRef;
-  @ViewChild('subjectInput') subjectInput!: ElementRef;
-  @ViewChild('emailInput') emailInput!: ElementRef;
-  @ViewChild('messageInput') messageInput!: ElementRef;
+  @ViewChild('contactForm') contactForm!: NgForm;
+
   submitted = false;
   isError = false;
   isLoading = false;
 
   constructor(private emailService: EmailService) { }
 
-  onSubmit(event: Event) {
+  onSubmit(event: Event): void {
     event.preventDefault();
+
+    if (!this.contactForm?.valid) {
+      return;
+    }
+
     this.isLoading = true;
     this.isError = false;
 
     const data = {
-      name: this.nameInput.nativeElement.value,
-      email: this.emailInput.nativeElement.value,
-      message: this.messageInput.nativeElement.value,
-      subject: this.subjectInput.nativeElement.value
+      name: this.contactForm.value.name?.trim(),
+      email: this.contactForm.value.email?.trim(),
+      subject: this.contactForm.value.subject?.trim(),
+      message: this.contactForm.value.message?.trim()
     };
 
-    //call aws api to send the email
     this.emailService.sendEmail(data).subscribe({
-      next: (res) => {
+      next: () => {
         this.submitted = true;
         this.isLoading = false;
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error sending email:', err);
         this.isError = true;
         this.isLoading = false;
       }
