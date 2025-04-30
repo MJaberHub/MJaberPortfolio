@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { ContactComponent } from './contact.component';
 import { EmailService } from '../services/email.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -12,8 +14,11 @@ describe('ContactComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule
+        FormsModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot()
       ],
+      declarations: [ContactComponent],
       providers: [
         EmailService
       ]
