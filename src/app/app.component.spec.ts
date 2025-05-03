@@ -11,6 +11,7 @@ import { ExperienceComponent } from './experience/experience.component';
 import { SkillsComponent } from './skills/skills.component';
 import { ContactComponent } from './contact/contact.component';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 
 describe('AppComponent', () => {
   let translateService: TranslateService;
@@ -31,7 +32,8 @@ describe('AppComponent', () => {
         ExperienceComponent,
         SkillsComponent,
         ContactComponent,
-        LanguageSwitcherComponent
+        LanguageSwitcherComponent,
+        ScrollToTopComponent
       ],
       providers: [
         TranslateService,

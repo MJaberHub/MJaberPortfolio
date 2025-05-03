@@ -1,9 +1,11 @@
+$primary: #0056b3;
+
 /* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~font-awesome/css/font-awesome.min.css';
+@import 'bootstrap/scss/bootstrap';
+@import 'font-awesome/css/font-awesome.min.css';
 
 :root {
-  --primary-color: #0d6efd;
+  --primary-color: #0056b3;
   --secondary-color: #6c757d;
   --dark-color: #343a40;
   --light-color: #f8f9fa;
@@ -195,4 +197,37 @@ body {
   .timeline-item.right::after {
     left: 20px;
   }
+}
+
+/* Custom Scrollbar to match aymanjabali.com */
+::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.5);
+  border-radius: 10px;
+  min-height: 24px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.8);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.5) transparent;
+}
+
+html {
+  scroll-behavior: smooth;
 }

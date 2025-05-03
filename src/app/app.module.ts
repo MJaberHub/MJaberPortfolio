@@ -15,6 +15,7 @@ import { SkillsComponent } from './skills/skills.component';
 import { ContactComponent } from './contact/contact.component';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 import { EmailService } from './services/email.service';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -31,7 +32,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ExperienceComponent,
     SkillsComponent,
     ContactComponent,
-    LanguageSwitcherComponent
+    LanguageSwitcherComponent,
+    ScrollToTopComponent
   ],
   imports: [
     BrowserModule,

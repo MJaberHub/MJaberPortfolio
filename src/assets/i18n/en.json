@@ -19,10 +19,13 @@
     "FEATURED_COMPANIES": "Companies I've Worked With",
     "CARD1_TITLE": "Software Development",
     "CARD1_TEXT": "Expertise in scalable, robust backend and frontend systems using .NET, C#, and modern web technologies.",
+    "CARD1_DESCRIPTION": "I have extensive experience designing, developing, and maintaining scalable software solutions across the full stack. My work includes building robust APIs, modern web applications, and enterprise-grade systems using .NET, C#, Angular, and cloud technologies. I focus on clean architecture, code quality, and delivering business value through technology.",
     "CARD2_TITLE": "Banking & FinTech",
     "CARD2_TEXT": "Specialized in payment systems, card management, and core banking solutions including Temenos T24.",
+    "CARD2_DESCRIPTION": "My expertise in Banking & FinTech includes designing and integrating payment systems, card management, and core banking solutions such as Temenos T24. I have worked closely with financial institutions to deliver secure, compliant, and innovative digital banking products.",
     "CARD3_TITLE": "Cloud & DevOps",
-    "CARD3_TEXT": "Experience with containerization, CI/CD pipelines, and microservices architecture."
+    "CARD3_TEXT": "Experience with containerization, CI/CD pipelines, and microservices architecture.",
+    "CARD3_DESCRIPTION": "I have hands-on experience with cloud platforms, containerization, and DevOps practices. My work includes building CI/CD pipelines, deploying microservices, and ensuring high availability and scalability for modern applications in the cloud."
   },
   "ABOUT": {
     "TITLE": "About Me",

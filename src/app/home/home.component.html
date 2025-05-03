@@ -27,7 +27,7 @@
   
   <div class="row mt-5">
     <div class="col-md-4">
-      <div class="card h-100">
+      <div class="card h-100 clickable-card" (click)="openModal(1)">
         <div class="card-body text-center">
           <i class="fa fa-code fa-3x text-primary mb-3"></i>
           <h4>{{ 'HOME.CARD1_TITLE' | translate }}</h4>
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card h-100">
+      <div class="card h-100 clickable-card" (click)="openModal(2)">
         <div class="card-body text-center">
           <i class="fa fa-bank fa-3x text-primary mb-3"></i>
           <h4>{{ 'HOME.CARD2_TITLE' | translate }}</h4>
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card h-100">
+      <div class="card h-100 clickable-card" (click)="openModal(3)">
         <div class="card-body text-center">
           <i class="fa fa-cloud fa-3x text-primary mb-3"></i>
           <h4>{{ 'HOME.CARD3_TITLE' | translate }}</h4>
@@ -54,3 +54,21 @@
       </div>
     </div>
   </div>
+
+<!-- Modal -->
+<div class="custom-modal-backdrop" *ngIf="showModal" (click)="closeModal()"></div>
+<div class="custom-modal" *ngIf="showModal" tabindex="-1" role="dialog" aria-modal="true">
+  <div class="custom-modal-content">
+    <button class="close-btn" (click)="closeModal()" aria-label="Close">&times;</button>
+    <h3>
+      {{ selectedCard === 1 ? ('HOME.CARD1_TITLE' | translate) : 
+         selectedCard === 2 ? ('HOME.CARD2_TITLE' | translate) : 
+         ('HOME.CARD3_TITLE' | translate) }}
+    </h3>
+    <p>
+      {{ selectedCard === 1 ? ('HOME.CARD1_DESCRIPTION' | translate) : 
+         selectedCard === 2 ? ('HOME.CARD2_DESCRIPTION' | translate) : 
+         ('HOME.CARD3_DESCRIPTION' | translate) }}
+    </p>
+  </div>
+</div>

@@ -19,10 +19,13 @@
     "FEATURED_COMPANIES": "Entreprises avec lesquelles j'ai travaillé",
     "CARD1_TITLE": "Développement Logiciel",
     "CARD1_TEXT": "Expertise dans les systèmes backend et frontend évolutifs et robustes utilisant .NET, C# et technologies web modernes.",
+    "CARD1_DESCRIPTION": "J'ai une vaste expérience dans la conception, le développement et la maintenance de solutions logicielles évolutives sur toute la stack. Mon travail inclut la création d'API robustes, d'applications web modernes et de systèmes d'entreprise utilisant .NET, C#, Angular et les technologies cloud. Je me concentre sur une architecture propre, la qualité du code et la création de valeur métier grâce à la technologie.",
     "CARD2_TITLE": "Banque & FinTech",
     "CARD2_TEXT": "Spécialisé dans les systèmes de paiement, la gestion des cartes et les solutions bancaires principales, y compris Temenos T24.",
+    "CARD2_DESCRIPTION": "Mon expertise en Banque & FinTech inclut la conception et l'intégration de systèmes de paiement, la gestion des cartes et des solutions bancaires principales telles que Temenos T24. J'ai travaillé en étroite collaboration avec des institutions financières pour fournir des produits bancaires numériques sécurisés, conformes et innovants.",
     "CARD3_TITLE": "Cloud & DevOps",
-    "CARD3_TEXT": "Expérience avec la conteneurisation, les pipelines CI/CD et l'architecture de microservices."
+    "CARD3_TEXT": "Expérience avec la conteneurisation, les pipelines CI/CD et l'architecture de microservices.",
+    "CARD3_DESCRIPTION": "J'ai une expérience pratique avec les plateformes cloud, la conteneurisation et les pratiques DevOps. Mon travail inclut la création de pipelines CI/CD, le déploiement de microservices et l'assurance de la haute disponibilité et de l'évolutivité des applications modernes dans le cloud."
   },
   "ABOUT": {
     "TITLE": "À Propos de Moi",
