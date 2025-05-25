@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mohamad-jaber.online/sitemap.xml 
