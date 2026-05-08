@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 env:
-  AWS_REGION: me-south-1
-  S3_BUCKET: portfolio-website-mjaber
+  AWS_REGION: eu-central-1
+  S3_BUCKET: portfolio-website-mjaber-dr
   CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
 
 jobs:
