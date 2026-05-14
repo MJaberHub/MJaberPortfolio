@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
     apiSendEmailUrl: 'https://tmgbqfzerb.execute-api.us-east-1.amazonaws.com/prod/send-email',
-    domainUrl: 'https://mohamad-jaber.online'
+    domainUrl: 'https://mohamad-jaber.com'
   };
